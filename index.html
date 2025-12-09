@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery with CSS Grid | Auto-fit Responsive</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header mejorado -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-camera"></i>
+                    <h1>Pixel<span class="logo-highlight">Gallery</span></h1>
+                </div>
+                <p class="subtitle">Responsive gallery con CSS Grid <code>auto-fit</code> & <code>minmax()</code></p>
+            </div>
+            
+            <!-- Stats header -->
+            <div class="header-stats">
+                <div class="stat">
+                    <span class="stat-number" id="totalPhotos">12</span>
+                    <span class="stat-label">Fotos</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">6</span>
+                    <span class="stat-label">Categorías</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" id="featuredCount">2</span>
+                    <span class="stat-label">Destacadas</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Panel de control -->
+        <div class="control-panel">
+            <div class="controls-left">
+                <button class="btn btn-filter active" data-filter="all">
+                    <i class="fas fa-th"></i>
+                    <span>Todas</span>
+                </button>
+                <button class="btn btn-filter" data-filter="nature">
+                    <i class="fas fa-tree"></i>
+                    <span>Naturaleza</span>
+                </button>
+                <button class="btn btn-filter" data-filter="urban">
+                    <i class="fas fa-city"></i>
+                    <span>Urbano</span>
+                </button>
+                <button class="btn btn-filter" data-filter="travel">
+                    <i class="fas fa-plane"></i>
+                    <span>Viajes</span>
+                </button>
+            </div>
+            
+            <div class="controls-right">
+                <div class="view-options">
+                    <button class="btn btn-view active" data-view="grid">
+                        <i class="fas fa-th-large"></i>
+                    </button>
+                    <button class="btn btn-view" data-view="masonry">
+                        <i class="fas fa-th"></i>
+                    </button>
+                    <button class="btn btn-view" data-view="list">
+                        <i class="fas fa-list"></i>
+                    </button>
+                </div>
+                
+                <div class="grid-controls">
+                    <button class="btn btn-grid" id="decreaseGrid">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <span class="grid-size" id="gridSize">250px</span>
+                    <button class="btn btn-grid" id="increaseGrid">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+                
+                <button class="btn btn-upload">
+                    <i class="fas fa-upload"></i>
+                    <span>Subir Foto</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Gallery Grid -->
+        <section class="gallery" id="gallery">
+            <div class="gallery-item" data-category="nature" data-featured="true">
+                <div class="item-header">
+                    <span class="item-badge">
+                        <i class="fas fa-star"></i> Destacada
+                    </span>
+                    <button class="btn-like">
+                        <i class="far fa-heart"></i>
+                    </button>
+                </div>
+                <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500&h=500&fit=crop" alt="Mountain landscape" loading="lazy">
+                <div class="overlay">
+                    <div class="overlay-content">
+                        <div class="photo-info">
+                            <h3>Mountain View</h3>
+                            <p>Landscape Photography</p>
+                            <div class="photo-meta">
+                                <span><i class="far fa-calendar"></i> 15 Mar 2024</span>
+                                <span><i class="far fa-eye"></i> 2.4K</span>
+                            </div>
+                        </div>
+                        <div class="overlay-actions">
+                            <button class="btn-action">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                            <button class="btn-action">
+                                <i class="fas fa-download"></i>
+                            </button>
+                            <button class="btn-action">
+                                <i class="fas fa-share-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-item featured" data-category="nature" data-featured="true">
+                <div class="item-header">
+                    <span class="item-badge">
+                        <i class="fas fa-crown"></i> Popular
+                    </span>
+                    <button class="btn-like active">
+                        <i class="fas fa-heart"></i>
+                    </button>
+                </div>
+                <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=500&h=500&fit=crop" alt="Forest path" loading="lazy">
+                <div class="overlay">
+                    <div class="overlay-content">
+                        <div class="photo-info">
+                            <h3>Forest Path</h3>
+                            <p>Nature Photography</p>
+                            <div class="photo-meta">
+                                <span><i class="far fa-calendar"></i> 12 Abr 2024</span>
+                                <span><i class="far fa-eye"></i> 3.1K</span>
+                            </div>
+                        </div>
+                        <div class="overlay-actions">
+                            <button class="btn-action">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                            <button class="btn-action">
+                                <i class="fas fa-download"></i>
+                            </button>
+                            <button class="btn-action">
+                                <i class="fas fa-share-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-category="travel">
+                <div class="item-header">
+                    <span class="item-badge new">
+                        <i class="fas fa-bolt"></i> Nueva
+                    </span>
+                    <button class="btn-like">
+                        <i class="far fa-heart"></i>
+                    </button>
+                </div>
+                <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500&h=500&fit=crop" alt="Beach sunset" loading="lazy">
+                <div class="overlay">
+                    <div class="overlay-content">
+                        <div class="photo-info">
+                            <h3>Beach Sunset</h3>
+                            <p>Seascape Photography</p>
+                            <div class="photo-meta">
+                                <span><i class="far fa-calendar"></i> 20 Feb 2024</span>
+                                <span><i class="far fa-eye"></i> 1.8K</span>
+                            </div>
+                        </div>
+                        <div class="overlay-actions">
+                            <button class="btn-action">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                            <button class="btn-action">
+                                <i class="fas fa-download"></i>
+                            </button>
+                            <button class="btn-action">
+                                <i class="fas fa-share-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-category="nature">
+                <div class="item-header">
+                    <span class="item-badge">
+                        <i class="fas fa-certificate"></i> Premium
+                    </span>
+                    <button class="btn-like">
+                        <i class="far fa-heart"></i>
+                    </button>
+                </div>
+                <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=500&h=500&fit=crop" alt="Night sky" loading="lazy">
+                <div class="overlay">
+                    <div class="overlay-content">
+                        <div class="photo-info">
+                            <h3>Starry Night</h3>
+                            <p>Astrophotography</p>
+                            <div class="photo-meta">
+                                <span><i class="far fa-calendar"></i> 05 Ene 2024</span>
+                                <span><i class="far fa-eye"></i> 4.2K</span>
+                            </div>
+                        </div>
+                        <div class="overlay-actions">
+                            <button class="btn-action">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                            <button class="btn-action">
+                                <i class="fas fa-download"></i>
+                            </button>
+                            <button class="btn-action">
+                                <i class="fas fa-share-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-category="nature">
+                <div class="item-header">
+                    <button class="btn-like">
+                        <i class="far fa-heart"></i>
+                    </button>
+                </div>
+                <img src="https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?w=500&h=500&fit=crop" alt="Flowers" loading="lazy">
+                <div class="overlay">
+                    <div class="overlay-content">
+                        <div class="photo-info">
+                            <h3>Spring Flowers</h3>
+                            <p>Macro Photography</p>
+                            <div class="photo-meta">
+                                <span><i class="far fa-calendar"></i> 18 Mar 2024</span>
+                                <span><i class="far fa-eye"></i> 1.5K</span>
+                            </div>
+                        </div>
+                        <div class="overlay-actions">
+                            <button class="btn-action">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                            <button class="btn-action">
+                                <i class="fas fa-download"></i>
+                            </button>
+                            <button class="btn-action">
+                                <i class="fas fa-share-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-category="urban">
+                <div class="item-header">
+                    <button class="btn-like active">
+                        <i class="fas fa-heart"></i>
+                    </button>
+                </div>
+                <img src="https://images.unsplash.com/photo-1516617442324-41f12f84c905?w=500&h=500&fit=crop" alt="City lights" loading="lazy">
+                <div class="overlay">
+                    <div class="overlay-content">
+                        <div class="photo-info">
+                            <h3>City Lights</h3>
+                            <p>Urban Photography</p>
+                            <div class="photo-meta">
+                                <span><i class="far fa-calendar"></i> 22 Feb 2024</span>
+                                <span><i class="far fa-eye"></i> 2.9K</span>
+                            </div>
+                        </div>
+                        <div class="overlay-actions">
+                            <button class="btn-action">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                            <button class="btn-action">
+                                <i class="fas fa-download"></i>
+                            </button>
+                            <button class="btn-action">
+                                <i class="fas fa-share-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-category="nature">
+                <div class="item-header">
+                    <button class="btn-like">
+                        <i class="far fa-heart"></i>
+                    </button>
+                </div>
+                <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=500&h=500&fit=crop" alt="Misty forest" loading="lazy">
+                <div class="overlay">
+                    <div class="overlay-content">
+                        <div class="photo-info">
+                            <h3>Misty Forest</h3>
+                            <p>Atmospheric Photography</p>
+                            <div class="photo-meta">
+                                <span><i class="far fa-calendar"></i> 08 Nov 2023</span>
+                                <span><i class="far fa-eye"></i> 3.7K</span>
+                            </div>
+                        </div>
+                        <div class="overlay-actions">
+                            <button class="btn-action">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                            <button class="btn-action">
+                                <i class="fas fa-download"></i>
+                            </button>
+                            <button class="btn-action">
+                                <i class="fas fa-share-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-category="travel">
+                <div class="item-header">
+                    <span class="item-badge popular">
+                        <i class="fas fa-fire"></i> Trending
+                    </span>
+                    <button class="btn-like">
+                        <i class="far fa-heart"></i>
+                    </button>
+                </div>
+                <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=500&h=500&fit=crop" alt="Desert" loading="lazy">
+                <div class="overlay">
+                    <div class="overlay-content">
+                        <div class="photo-info">
+                            <h3>Desert Dunes</h3>
+                            <p>Adventure Photography</p>
+                            <div class="photo-meta">
+                                <span><i class="far fa-calendar"></i> 30 Dic 2023</span>
+                                <span><i class="far fa-eye"></i> 2.1K</span>
+                            </div>
+                        </div>
+                        <div class="overlay-actions">
+                            <button class="btn-action">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                            <button class="btn-action">
+                                <i class="fas fa-download"></i>
+                            </button>
+                            <button class="btn-action">
+                                <i class="fas fa-share-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-item featured" data-category="nature">
+                <div class="item-header">
+                    <span class="item-badge">
+                        <i class="fas fa-award"></i> Editor's Choice
+                    </span>
+                    <button class="btn-like active">
+                        <i class="fas fa-heart"></i>
+                    </button>
+                </div>
+                <img src="https://images.unsplash.com/photo-1511884642898-4c92249e20b6?w=500&h=500&fit=crop" alt="Waterfall" loading="lazy">
+                <div class="overlay">
+                    <div class="overlay-content">
+                        <div class="photo-info">
+                            <h3>Waterfall</h3>
+                            <p>Long Exposure Photography</p>
+                            <div class="photo-meta">
+                                <span><i class="far fa-calendar"></i> 14 Ene 2024</span>
+                                <span><i class="far fa-eye"></i> 5.3K</span>
+                            </div>
+                        </div>
+                        <div class="overlay-actions">
+                            <button class="btn-action">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                            <button class="btn-action">
+                                <i class="fas fa-download"></i>
+                            </button>
+                            <button class="btn-action">
+                                <i class="fas fa-share-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-category="travel">
+                <div class="item-header">
+                    <button class="btn-like">
+                        <i class="far fa-heart"></i>
+                    </button>
+                </div>
+                <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=500&h=500&fit=crop" alt="Snowy mountains" loading="lazy">
+                <div class="overlay">
+                    <div class="overlay-content">
+                        <div class="photo-info">
+                            <h3>Snowy Peaks</h3>
+                            <p>Winter Photography</p>
+                            <div class="photo-meta">
+                                <span><i class="far fa-calendar"></i> 12 Feb 2024</span>
+                                <span><i class="far fa-eye"></i> 1.9K</span>
+                            </div>
+                        </div>
+                        <div class="overlay-actions">
+                            <button class="btn-action">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                            <button class="btn-action">
+                                <i class="fas fa-download"></i>
+                            </button>
+                            <button class="btn-action">
+                                <i class="fas fa-share-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-category="travel">
+                <div class="item-header">
+                    <span class="item-badge">
+                        <i class="fas fa-trophy"></i> Top Rated
+                    </span>
+                    <button class="btn-like">
+                        <i class="far fa-heart"></i>
+                    </button>
+                </div>
+                <img src="https://images.unsplash.com/photo-1475924156734-496f6cac6ec1?w=500&h=500&fit=crop" alt="Tropical beach" loading="lazy">
+                <div class="overlay">
+                    <div class="overlay-content">
+                        <div class="photo-info">
+                            <h3>Paradise Beach</h3>
+                            <p>Travel Photography</p>
+                            <div class="photo-meta">
+                                <span><i class="far fa-calendar"></i> 25 Mar 2024</span>
+                                <span><i class="far fa-eye"></i> 3.4K</span>
+                            </div>
+                        </div>
+                        <div class="overlay-actions">
+                            <button class="btn-action">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                            <button class="btn-action">
+                                <i class="fas fa-download"></i>
+                            </button>
+                            <button class="btn-action">
+                                <i class="fas fa-share-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-category="nature">
+                <div class="item-header">
+                    <button class="btn-like">
+                        <i class="far fa-heart"></i>
+                    </button>
+                </div>
+                <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=500&h=500&fit=crop" alt="River valley" loading="lazy">
+                <div class="overlay">
+                    <div class="overlay-content">
+                        <div class="photo-info">
+                            <h3>River Valley</h3>
+                            <p>Aerial Photography</p>
+                            <div class="photo-meta">
+                                <span><i class="far fa-calendar"></i> 09 Abr 2024</span>
+                                <span><i class="far fa-eye"></i> 2.8K</span>
+                            </div>
+                        </div>
+                        <div class="overlay-actions">
+                            <button class="btn-action">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                            <button class="btn-action">
+                                <i class="fas fa-download"></i>
+                            </button>
+                            <button class="btn-action">
+                                <i class="fas fa-share-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Explicación mejorada -->
+        <section class="explanation">
+            <h2><i class="fas fa-magic"></i> Cómo Funciona Este Grid Inteligente</h2>
+            
+            <div class="explanation-grid">
+                <div class="code-example">
+                    <div class="code-header">
+                        <h3><i class="fas fa-code"></i> CSS Grid Mágico</h3>
+                        <button class="btn-copy" data-target="gridCode">
+                            <i class="far fa-copy"></i> Copiar
+                        </button>
+                    </div>
+                    <pre id="gridCode"><code>.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(var(--grid-size), 1fr));
+    grid-auto-rows: 250px;
+    gap: 1.5rem;
+    grid-auto-flow: dense;
+}
+
+.gallery-item.featured {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+
+/* ⭐ auto-fit: Crea columnas automáticamente
+   ⭐ minmax(): Tamaño flexible con límites
+   ⭐ grid-auto-flow: dense; Rellena huecos automáticamente
+   ⭐ 1fr: Usa fracciones del espacio disponible */</code></pre>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <h4>Auto-fit Inteligente</h4>
+                        <p>Calcula automáticamente el número óptimo de columnas basándose en el espacio disponible.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-expand-alt"></i>
+                        </div>
+                        <h4>Minmax Flexible</h4>
+                        <p>Define límites flexibles: mínimo 200px, máximo 1fr. Se adapta a cualquier contenedor.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-th-large"></i>
+                        </div>
+                        <h4>Grid Dense</h4>
+                        <p>Rellena huecos automáticamente con elementos más pequeños, optimizando el espacio.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h4>Responsive Nativo</h4>
+                        <p>Sin media queries complejas. Se adapta fluidamente a móviles, tablets y escritorio.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Demo interactiva -->
+            <div class="interactive-demo">
+                <h3><i class="fas fa-sliders-h"></i> Demo Interactiva</h3>
+                <div class="demo-controls">
+                    <div class="control-group">
+                        <label for="gridSizeSlider">Tamaño de Grid: <span id="gridSizeValue">250px</span></label>
+                        <input type="range" id="gridSizeSlider" min="150" max="350" value="250" step="10">
+                    </div>
+                    <div class="control-group">
+                        <label for="gapSizeSlider">Espaciado: <span id="gapSizeValue">1.5rem</span></label>
+                        <input type="range" id="gapSizeSlider" min="0.5" max="3" value="1.5" step="0.1">
+                    </div>
+                    <div class="control-group">
+                        <label for="featuredToggle">
+                            <input type="checkbox" id="featuredToggle" checked>
+                            Mostrar items destacados
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comparación -->
+            <div class="comparison">
+                <h3><i class="fas fa-balance-scale"></i> Comparación: Grid vs Flexbox</h3>
+                <div class="comparison-grid">
+                    <div class="comparison-item grid">
+                        <h4>CSS Grid</h4>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Bidimensional (filas y columnas)</li>
+                            <li><i class="fas fa-check"></i> Control preciso de posiciones</li>
+                            <li><i class="fas fa-check"></i> Auto-fit y Auto-fill nativos</li>
+                            <li><i class="fas fa-check"></i> Perfecto para layouts complejos</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-item flexbox">
+                        <h4>Flexbox</h4>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Unidimensional (fila o columna)</li>
+                            <li><i class="fas fa-check"></i> Alineación sencilla</li>
+                            <li><i class="fas fa-check"></i> Ideal para componentes</li>
+                            <li><i class="fas fa-check"></i> Mejor para contenidos lineales</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-camera"></i>
+                        <span>PixelGallery</span>
+                    </div>
+                    <p>Galería responsive construida con CSS Grid moderno y mejores prácticas.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-codepen"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Recursos</h4>
+                    <ul>
+                        <li><a href="#">Documentación CSS Grid</a></li>
+                        <li><a href="#">Ejemplos de Auto-fit</a></li>
+                        <li><a href="#">Guía de Minmax()</a></li>
+                        <li><a href="#">Herramientas de Grid</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Proyecto</h4>
+                    <ul>
+                        <li><a href="#">Código Fuente</a></li>
+                        <li><a href="#">Demo en vivo</a></li>
+                        <li><a href="#">Artículo Técnico</a></li>
+                        <li><a href="#">Reportar Error</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 PixelGallery. Demostración educativa de CSS Grid.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Modal para vista ampliada -->
+    <div class="modal" id="imageModal">
+        <div class="modal-content">
+            <button class="modal-close">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-image">
+                <img src="" alt="">
+            </div>
+            <div class="modal-info">
+                <h3 id="modalTitle"></h3>
+                <p id="modalDescription"></p>
+                <div class="modal-actions">
+                    <button class="btn btn-download">
+                        <i class="fas fa-download"></i> Descargar
+                    </button>
+                    <button class="btn btn-share">
+                        <i class="fas fa-share-alt"></i> Compartir
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de subida -->
+    <div class="modal" id="uploadModal">
+        <div class="modal-content">
+            <button class="modal-close">
+                <i class="fas fa-times"></i>
+            </button>
+            <h3><i class="fas fa-upload"></i> Subir Nueva Foto</h3>
+            <div class="upload-area" id="uploadArea">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <p>Arrastra y suelta una imagen o haz clic para seleccionar</p>
+                <input type="file" id="fileInput" accept="image/*">
+            </div>
+            <div class="upload-form">
+                <div class="form-group">
+                    <input type="text" placeholder="Título de la foto" id="photoTitle">
+                </div>
+                <div class="form-group">
+                    <select id="photoCategory">
+                        <option value="">Selecciona categoría</option>
+                        <option value="nature">Naturaleza</option>
+                        <option value="urban">Urbano</option>
+                        <option value="travel">Viajes</option>
+                        <option value="portrait">Retratos</option>
+                    </select>
+                </div>
+                <button class="btn btn-primary btn-upload-submit">
+                    <i class="fas fa-upload"></i> Subir Foto
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
